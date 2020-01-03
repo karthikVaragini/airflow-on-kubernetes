@@ -10,9 +10,12 @@ add kubernetes in the following line like this
 
 && pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,kubernetes,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION}
 
-docker build -t <imageName> .
+save the file, buid the docker image
+
+docker build -t #imageName .
 
 to decrease all this , can use directly this docker image
+
 docker pull varaginikarthik/airflow_aws_image:latest
 
 Install Helm
