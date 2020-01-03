@@ -16,15 +16,22 @@ to decrease all this , can use directly this docker image
 docker pull varaginikarthik/airflow_aws_image:latest
 
 Install Helm
-    -> 	curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
-		->	chmod 700 get_helm.sh
-		->	./get_helm.sh
-		->  helm init
+	-> 	curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh
+    
+	->	chmod 700 get_helm.sh
+		
+	->	./get_helm.sh
+		
+	->  	helm init
 
 kubectl create serviceaccount --namespace kube-system tiller
+
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'      
+
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}' 
+
 helm init --service-account tiller --upgrade
+
 
 After the HELM instalation
 
@@ -64,21 +71,37 @@ Git Sync gets the dags from our git repo, this is popularly used
 open the values.yaml file, do the following changes for respective fields
 
 git:
+
      ##
+     
      ## url to clone the git repository
+     
     url: https://github.com/karthikVaragini/ganiDAGs.git ------ Repo where our Dags reside
+    
      ##
+     
      ## branch name, tag or sha1 to reset to
+     
      ref: master
+     
      privateKeyName: ""
+     
      gitSync:
+     
        ## Turns on the side car container
+       
       enabled: true
+      
        ## The amount of time in seconds to git pull dags
+       
       refreshTime: 2
+      
    initContainer:
+   
      ## Fetch the source code when the pods starts
+     
      enabled: true
+     
 
 again install the Airflow with the following command 
 
